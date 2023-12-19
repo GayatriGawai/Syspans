@@ -1,28 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Welcome to HRM module 1</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-            rel="stylesheet"
-        />
-    </head>
-    <body class="bg-gray-100">
-        <div class="bg-yellow-600 w-fit h-16">
-            <h1 class="text-4xl font-bold text-center p-2">HRM module 1</h1>
-        </div>
+import React from 'react';
+function validateLogin() {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    if (email === 'admin@gmail.com' && password === 'admin') {
+        alert('Logged in as admin!');
+        window.location.href = 'admin_dashboard.html';
+    } else if (email === 'emp@gmail.com' && password === '12345678') {
+        alert('Logged in as employee');
+        window.location.href = 'emp_dashboard.html';
+    } else {
+        alert('Invalid username or password. Please try again.');
+    }
+
+    return false;
+}
+
+const Login = () => {
+    return (
         <div class="container mx-auto mt-16">
             <section class="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
                 <h2 class="text-2xl font-semibold mb-4 font-bold">Sign In</h2>
-                <form onsubmit="return validateLogin()">
+                <form onsubmit={validateLogin}>
                     <div class="mb-4">
                         <label
                             for="email"
                             class="block text-gray-700 text-sm font-bold mb-2"
-                            >Email</label
                         >
+                            Email
+                        </label>
                         <input
                             type="email"
                             id="email"
@@ -37,8 +43,9 @@
                         <label
                             for="password"
                             class="block text-gray-700 text-sm font-bold mb-2"
-                            >Password</label
                         >
+                            Password
+                        </label>
                         <input
                             type="password"
                             id="password"
@@ -58,6 +65,7 @@
                 </form>
             </section>
         </div>
-        <script src="/auth/login.js"></script>
-    </body>
-</html>
+    );
+};
+
+export default Login;
