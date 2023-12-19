@@ -4,7 +4,7 @@ const Admin_dashboard = () => {
     return (
         <div>
             <header className="bg-yellow-600 w-fit h-16 py-2">
-                <p className="text-center font-bold text-4xl px-5">
+                <p className="text-center font-semibold text-4xl px-5">
                     <i className="fas fa-user"></i> Admin Dashboard
                 </p>
             </header>
