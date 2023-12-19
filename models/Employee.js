@@ -77,10 +77,16 @@ const EmployeeSchema = new mongoose.Schema({
             },
         },
     ],
+    attendance: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'AttendanceRecord',
+        },
+    ],
     date: {
         type: Date,
         default: Date.now,
     },
 });
 
-module.exports = Employee = mongoose.model('profile', EmployeeSchema);
+module.exports = Employee = mongoose.model('Employee', EmployeeSchema);

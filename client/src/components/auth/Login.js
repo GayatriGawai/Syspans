@@ -1,22 +1,26 @@
 import React from 'react';
-function validateLogin() {
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-
-    if (email === 'admin@insnapsys.com' && password === 'admin') {
-        alert('Logged in as admin!');
-        window.location.href = 'admin_dashboard.html';
-    } else if (email === 'emp@gmail.com' && password === '12345678') {
-        alert('Logged in as employee');
-        window.location.href = 'emp_dashboard.html';
-    } else {
-        alert('Invalid username or password. Please try again.');
-    }
-
-    return false;
-}
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate = useNavigate();
+    const validateLogin = (e) => {
+        e.preventDefault();
+
+        var email = e.target.email.value;
+        var password = e.target.password.value;
+
+        if (email === 'admin@insnapsys.com' && password === 'admin') {
+            alert('Logged in as admin!');
+            navigate('/admin_dashboard');
+        } else if (email === 'emp@gmail.com' && password === '12345678') {
+            alert('Logged in as employee');
+            navigate('/emp_dashboard');
+        } else {
+            alert('Invalid username or password. Please try again.');
+        }
+
+        return false;
+    };
     return (
         <div className="container mx-auto mt-16">
             <section className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
