@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react';
+import './App.css';
+import Login from './components/auth/Login';
 
-const App = () => {
+const App = () => (
     <Fragment>
-        <h1>App</h1>
-    </Fragment>;
-};
+        <Login />
+    </Fragment>
+);
 
 export default App;

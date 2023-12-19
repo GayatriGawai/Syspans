@@ -3,7 +3,7 @@ function validateLogin() {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
 
-    if (email === 'admin@gmail.com' && password === 'admin') {
+    if (email === 'admin@insnapsys.com' && password === 'admin') {
         alert('Logged in as admin!');
         window.location.href = 'admin_dashboard.html';
     } else if (email === 'emp@gmail.com' && password === '12345678') {
@@ -18,14 +18,16 @@ function validateLogin() {
 
 const Login = () => {
     return (
-        <div class="container mx-auto mt-16">
-            <section class="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
-                <h2 class="text-2xl font-semibold mb-4 font-bold">Sign In</h2>
-                <form onsubmit={validateLogin}>
-                    <div class="mb-4">
+        <div className="container mx-auto mt-16">
+            <section className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+                <h2 className="text-2xl font-semibold mb-4 font-bold">
+                    Sign In
+                </h2>
+                <form onSubmit={validateLogin}>
+                    <div className="mb-4">
                         <label
-                            for="email"
-                            class="block text-gray-700 text-sm font-bold mb-2"
+                            htmlFor="email"
+                            className="block text-gray-700 text-sm font-bold mb-2"
                         >
                             Email
                         </label>
@@ -33,16 +35,16 @@ const Login = () => {
                             type="email"
                             id="email"
                             name="email"
-                            class="w-full px-3 py-2 border rounded-md"
+                            className="w-full px-3 py-2 border rounded-md"
                             placeholder="Enter your Email"
                             required
                         />
                     </div>
 
-                    <div class="mb-4">
+                    <div className="mb-4">
                         <label
-                            for="password"
-                            class="block text-gray-700 text-sm font-bold mb-2"
+                            htmlFor="password"
+                            className="block text-gray-700 text-sm font-bold mb-2"
                         >
                             Password
                         </label>
@@ -50,7 +52,7 @@ const Login = () => {
                             type="password"
                             id="password"
                             name="password"
-                            class="w-full px-3 py-2 border rounded-md"
+                            className="w-full px-3 py-2 border rounded-md"
                             placeholder="Enter your password"
                             required
                         />
@@ -58,7 +60,7 @@ const Login = () => {
 
                     <button
                         type="submit"
-                        class="bg-yellow-600 hover:bg-yellow-500 font-bold py-2 px-4 rounded"
+                        className="bg-yellow-600 hover:bg-yellow-500 font-bold py-2 px-4 rounded"
                     >
                         Login
                     </button>
