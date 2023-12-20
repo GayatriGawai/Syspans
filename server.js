@@ -20,11 +20,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //Defining the routes
-app.use('/api', require('./routes/api/admin')); // for users
+app.use('/api', require('./routes/api/admin')); // for admin
+app.use('/api/auth', require('./routes/api/auth')); // auth
 app.use('/api/timesheet', require('./routes/api/timesheet')); // timesheet
 app.use('/api/leave', require('./routes/api/leave')); // leave management
 app.use('/api/empmng', require('./routes/api/empmng')); // Employee management
-app.use('/api/auth', require('./routes/api/auth')); // auth
 app.use('/api/attendance', require('./routes/api/attendance')); // Attendance
 app.use('/api/announcement', require('./routes/api/announcement')); // Announcement
 

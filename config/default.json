@@ -1,3 +1,6 @@
 {
-    "mongoURI":"mongodb+srv://gayatriginsnapsys:Gayatri%40123@cluster0.5qjz9iq.mongodb.net/?retryWrites=true&w=majority"
+    "mongoURI":"mongodb+srv://gayatriginsnapsys:Gayatri%40123@cluster0.5qjz9iq.mongodb.net/?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken"
+
+
 }

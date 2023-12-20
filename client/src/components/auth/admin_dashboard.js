@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Admin_dashboard = () => {
+    const [headers, setHeaders] = useState({});
+    useEffect(() => {
+        // Retrieve the JWT token from local storage
+        const token = localStorage.getItem('jwtToken');
+
+        // Include token in headers for protected requests
+        const authHeaders = {
+            'Content-Type': 'application/json',
+            'x-auth-token': token,
+        };
+        setHeaders(authHeaders);
+    }, []);
     return (
         <div>
             <header className="bg-yellow-600 w-fit h-16 py-2">

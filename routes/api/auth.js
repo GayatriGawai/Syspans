@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('../../middleware/auth');
 
-// @route   GET api/auth
-// @desc    Test route
-// @access  public
-
-router.get('/', (req, res) => res.send('auth route'));
+// Protected route using authMiddleware
+router.get('/', authMiddleware, (req, res) => {
+    res.json({ message: 'This is a protected route' });
+});
 
 module.exports = router;

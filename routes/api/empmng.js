@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Employee = require('../../models/Employee');
+const authMiddleware = require('../../middleware/auth');
 
 //Performed the CRUD operations
 
@@ -8,9 +9,15 @@ const Employee = require('../../models/Employee');
 // @desc    Create a new employee
 // @access  Public
 
-router.post('/', (req, res) => {
-    const newEmployee = new Employee(req.body);
-    newEmployee.save().then((employee) => res.json(employee));
+router.post('/', async (req, res) => {
+    try {
+        const newEmployee = new Employee(req.body);
+        const employee = await newEmployee.save();
+        res.json(employee);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server error');
+    }
 });
 
 //====================================================================================================

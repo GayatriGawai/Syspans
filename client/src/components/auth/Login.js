@@ -24,8 +24,8 @@ const Login = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    email: 'example@email.com',
-                    password: 'password123',
+                    email: 'admin@insnapsys.com',
+                    password: 'admin',
                 }),
             });
 
@@ -34,8 +34,12 @@ const Login = () => {
                 throw new Error(errorData.message);
             }
 
-            const data = await response.json();
-            alert(`Logged in as ${data.message}`);
+            const { token } = await response.json(); // Extract token from the response
+
+            // Store the token in localStorage or state for future use
+            localStorage.setItem('jwtToken', token);
+
+            alert('Logged in successfully'); // You can replace this with a redirect or any other action
             navigate('/admin_dashboard');
         } catch (error) {
             console.error('Error during login:', error.message);
