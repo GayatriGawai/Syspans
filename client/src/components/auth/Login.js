@@ -1,26 +1,48 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
-    const validateLogin = (e) => {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
+
+    const { email, password } = formData;
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const validateLogin = async (e) => {
         e.preventDefault();
 
-        var email = e.target.email.value;
-        var password = e.target.password.value;
+        try {
+            const response = await fetch('http://localhost:5000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: 'example@email.com',
+                    password: 'password123',
+                }),
+            });
 
-        if (email === 'admin@insnapsys.com' && password === 'admin') {
-            alert('Logged in as admin!');
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message);
+            }
+
+            const data = await response.json();
+            alert(`Logged in as ${data.message}`);
             navigate('/admin_dashboard');
-        } else if (email === 'emp@gmail.com' && password === '12345678') {
-            alert('Logged in as employee');
-            navigate('/emp_dashboard');
-        } else {
-            alert('Invalid username or password. Please try again.');
+        } catch (error) {
+            console.error('Error during login:', error.message);
+            alert('Error during login. Please try again.');
         }
-
-        return false;
     };
+
     return (
         <div className="container mx-auto mt-16">
             <section className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
@@ -39,6 +61,8 @@ const Login = () => {
                             type="email"
                             id="email"
                             name="email"
+                            value={email}
+                            onChange={handleChange}
                             className="w-full px-3 py-2 border rounded-md"
                             placeholder="Enter your Email"
                             required
@@ -56,6 +80,8 @@ const Login = () => {
                             type="password"
                             id="password"
                             name="password"
+                            value={password}
+                            onChange={handleChange}
                             className="w-full px-3 py-2 border rounded-md"
                             placeholder="Enter your password"
                             required

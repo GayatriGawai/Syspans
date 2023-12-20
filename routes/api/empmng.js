@@ -2,13 +2,18 @@ const express = require('express');
 const router = express.Router();
 const Employee = require('../../models/Employee');
 
+//Performed the CRUD operations
+
 // @route   POST api/user
 // @desc    Create a new employee
 // @access  Public
+
 router.post('/', (req, res) => {
     const newEmployee = new Employee(req.body);
     newEmployee.save().then((employee) => res.json(employee));
 });
+
+//====================================================================================================
 
 // @route   GET api/user
 // @desc    Get all employees
