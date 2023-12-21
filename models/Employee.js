@@ -1,6 +1,33 @@
 const mongoose = require('mongoose');
 
 const EmployeeSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    status: {
+        type: String,
+        enum: ['current', 'former', 'terminated', 'absconded'],
+        default: 'current',
+        required: true,
+    },
+    details: [
+        {
+            address: {
+                type: String,
+                required: true,
+            },
+            phone: {
+                type: Number,
+                required: true,
+            },
+            email: {
+                type: String,
+                required: true,
+                unique: true,
+            },
+        },
+    ],
     company: {
         type: String,
         default: 'Insnapsys',
@@ -15,9 +42,6 @@ const EmployeeSchema = new mongoose.Schema({
     skills: {
         type: [String],
         required: true,
-    },
-    bio: {
-        type: String,
     },
     experience: [
         {
