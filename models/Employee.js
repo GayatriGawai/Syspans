@@ -7,7 +7,14 @@ const EmployeeSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['current', 'former', 'terminated', 'absconded'],
+        enum: [
+            'current',
+            'former',
+            'terminated',
+            'absconded',
+            'trainee',
+            'intern',
+        ],
         default: 'current',
         required: true,
     },

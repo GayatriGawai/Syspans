@@ -17,6 +17,7 @@ router.post(
         authMiddleware,
         [
             check('name', 'Name is required').notEmpty(),
+            check('status', 'Status is required').notEmpty(),
             check('details.*.address', 'Address is required').notEmpty(),
             check('details.*.phone', 'Phone number is required').notEmpty(),
             check('details.*.email', 'Email address is required').notEmpty(),
@@ -53,6 +54,7 @@ router.post(
 
             const {
                 name,
+                status,
                 details,
                 company,
                 location,
@@ -66,6 +68,7 @@ router.post(
             const empFields = {
                 empID,
                 name,
+                status: status || 'current',
                 details,
                 comapny: company || 'Insnpsys',
                 location,
