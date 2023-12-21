@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 
 //Performed the CRUD operations
 
-// @route   POST api/empmng
+// @route   POST api/employees
 // @desc    Create a new employee
 // @access  Private
 
@@ -90,7 +90,7 @@ router.post(
 
 //====================================================================================================
 
-// @route   GET api/empmng
+// @route   GET api/employees
 // @desc    Get all employees
 // @access  Private
 router.get('/', authMiddleware, async (req, res) => {
@@ -109,7 +109,7 @@ router.get('/', authMiddleware, async (req, res) => {
 
 //====================================================================================================
 
-// @route   GET api/empmng/:id
+// @route   GET api/employees/:id
 // @desc    Get employee by ID
 // @access  Private
 router.get('/:id', authMiddleware, async (req, res) => {

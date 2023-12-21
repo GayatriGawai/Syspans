@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const leaveRecordSchema = new mongoose.Schema({
+    employee: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Employee',
+        required: true,
+    },
     startDate: {
         type: Date,
         required: true,
@@ -13,7 +18,7 @@ const leaveRecordSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    status: {
+    leaveStatus: {
         type: String,
         enum: ['pending', 'approved', 'rejected'],
         default: 'pending',
