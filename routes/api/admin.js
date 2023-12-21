@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
         jwt.sign(
             payload,
             config.get('jwtSecret'),
-            { expiresIn: 3600 },
+            { expiresIn: 36000 }, //36000 is equivalent to 10 hours and 3600 is 1 hour {we will change it in deployment}
             (err, token) => {
                 if (err) throw err;
                 res.json({ token });
