@@ -37,7 +37,7 @@ const Login = () => {
             const { token } = await response.json(); // Extract token from the response
 
             // Store the token in localStorage or state for future use
-            localStorage.setItem('jwtToken', token);
+            localStorage.setItem('jwtSecret', token);
 
             alert('Logged in successfully'); // You can replace this with a redirect or any other action
             navigate('/admin_dashboard');

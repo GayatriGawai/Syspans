@@ -94,9 +94,21 @@ router.post(
 // @desc    Get all employees
 // @access  Private
 router.get('/', authMiddleware, async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const config = { pageSize: 10 };
     try {
-        const employees = await Employee.find();
+        const totalEmp = await Employee.countDocuments();
+        const totalPage = Math.ceil(totalEmp / config.pageSize);
 
+        if (page < 1 || page > totalPage) {
+            return res.status(400).json({ msg: 'Invalid page number' });
+        }
+
+        const skip = (page - 1) * config.pageSize;
+
+        const employees = await Employee.find()
+            .skip(skip)
+            .limit(config.pageSize);
         if (!employees || employees.length === 0) {
             return res.status(404).json({ msg: 'No profiles found' });
         }

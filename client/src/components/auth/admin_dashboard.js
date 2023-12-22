@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Admin_dashboard = () => {
     const [headers, setHeaders] = useState({});
     useEffect(() => {
         // Retrieve the JWT token from local storage
-        const token = localStorage.getItem('jwtToken');
+        const token = localStorage.getItem('jwtSecret');
 
         // Include token in headers for protected requests
         const authHeaders = {
@@ -20,66 +21,58 @@ const Admin_dashboard = () => {
                     <i className="fas fa-user"></i> Admin Dashboard
                 </p>
             </header>
+
             <div className="m-6 text-4x px-5 w-fit flex justify-inline space-x-px">
                 <div>
-                    <a
-                        className="employee-button px-5"
-                        href="/employee_management/Emp_mngmt.html"
-                    >
+                    <Link className="employee-button px-5" to={'/employees'}>
                         <i className="fas fa-users fa-6x mt-16 text-center text-yellow-700 hover:text-yellow-600">
                             <p className="font-semibold text-sm mt-2 font-sans">
                                 Employee
                             </p>
                         </i>
-                    </a>
+                    </Link>
                 </div>
                 <div>
-                    <a
-                        className="attendance-button px-5"
-                        href="/Attendance/attendance.html"
-                    >
+                    <Link className="attendance-button px-5" to={'/attendance'}>
                         <i className="far fa-calendar-check fa-6x mt-16 text-center text-yellow-700 hover:text-yellow-600">
                             <p className="font-semibold text-sm mt-2 font-sans">
                                 Attendance
                             </p>
                         </i>
-                    </a>
+                    </Link>
                 </div>
                 <div>
-                    <a
-                        className="leave-button px-5"
-                        href="/LeaveManagement/Leave_Mngmt.html"
-                    >
+                    <Link className="leave-button px-5" to={'/leave'}>
                         <i className="fas fa-sign-out-alt fa-6x mt-16 text-center text-yellow-700 hover:text-yellow-600">
                             <p className="font-semibold text-sm mt-2 font-sans">
                                 Leave
                             </p>
                         </i>
-                    </a>
+                    </Link>
                 </div>
                 <div>
-                    <a
+                    <Link
                         className="notifications-button px-5"
-                        href="/Timesheet/timesheet.html"
+                        to={'/timesheet'}
                     >
                         <i className="far fa-clock fa-6x mt-16 text-center text-yellow-700 hover:text-yellow-600">
                             <p className="font-semibold text-sm mt-2 font-sans">
                                 Timesheet
                             </p>
                         </i>
-                    </a>
+                    </Link>
                 </div>
                 <div>
-                    <a
+                    <Link
                         className="notifications-button px-5"
-                        href="Announcement/announcement.html"
+                        to={'/announcement'}
                     >
                         <i className="far fa-newspaper fa-6x mt-16 text-center text-yellow-700 hover:text-yellow-600">
                             <p className="font-semibold text-sm mt-2 font-sans">
                                 Announcement
                             </p>
                         </i>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
