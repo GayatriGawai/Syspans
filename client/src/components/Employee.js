@@ -51,9 +51,9 @@ const Employee = () => {
                         <Link
                             to={'/employees'}
                             type="button"
-                            className="bg-green-500 float-right mb-2 h-10 rounded p-2 text-white hover:bg-green-600 hover:scale-105 hover:opacity-100 transition duration-300 ease-in-out"
+                            className="bg-green-500 float-right mb-2 h-10 w-10 text-center rounded p-2 text-white hover:bg-green-600 hover:scale-105 hover:opacity-100 transition duration-300 ease-in-out"
                         >
-                            <i className="fas fa-add"> </i> Add Employee
+                            <i className="fas fa-add"> </i>
                         </Link>
                     </div>
                     <div>
@@ -88,14 +88,14 @@ const Employee = () => {
                                                 href="#"
                                                 className="text-blue-500"
                                             >
-                                                Edit
+                                                <i className="fas fa-pencil"></i>
                                             </a>
 
                                             <a
                                                 href="#"
                                                 className="text-red-500 ml-2"
                                             >
-                                                Delete
+                                                <i className="fas fa-trash"></i>
                                             </a>
                                         </td>
                                     </tr>
