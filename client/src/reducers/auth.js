@@ -21,7 +21,6 @@ const auth = (state = initialState, action) => {
                 loading: false,
             };
         case LOGIN_FAIL:
-            // Handle registration failure
             return {
                 ...state,
                 token: null,
