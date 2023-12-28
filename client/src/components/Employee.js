@@ -2,22 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { deleteEmployee } from '../actions/employee';
 import { useDispatch } from 'react-redux';
-//import { getEmployees } from '../actions/employee';
-//import DeleteEmployee from './Employee/DeleteEmployee';
+import { getEmployees } from '../actions/employee';
+
 const Employee = (employee) => {
     const dispatch = useDispatch();
     console.log('Employee component rendered');
     const [employees, setEmployees] = useState([]);
 
     useEffect(() => {
-        // Retrieved the token from localStorage
         const token = localStorage.getItem('jwtSecret');
 
-        // Checked if the token is available
         if (token) {
             console.log('Token:', token);
-
-            // Made the fetch request with the token
             fetch('http://localhost:5000/api/employees', {
                 headers: {
                     'x-auth-token': token,
@@ -36,13 +32,12 @@ const Employee = (employee) => {
             console.error('Token is undefined');
         }
     }, []);
-
     const handleDelete = async (empId) => {
         try {
-            if (window.confirm('Are you sure? This can NOT be undone!')) {
-                await dispatch(deleteEmployee(empId));
-                // dispatch(deleteEmployee(employee._id));
-            }
+            await dispatch(deleteEmployee(empId));
+            setEmployees((prevEmployees) =>
+                prevEmployees.filter((employee) => employee._id !== empId)
+            );
         } catch (error) {
             console.error('Error deleting employee:', error);
         }
@@ -64,7 +59,7 @@ const Employee = (employee) => {
                 <div className="container">
                     <div className="contents">
                         <Link
-                            to={'/employees'}
+                            to={'/employees/add'}
                             type="button"
                             className="bg-green-500 float-right mb-2 h-10 w-fit text-center rounded p-2 text-white hover:bg-green-600 hover:scale-105 hover:opacity-100 transition duration-300 ease-in-out"
                         >

@@ -10,7 +10,7 @@ const { v4: uuidv4 } = require('uuid');
 // @access  Private
 
 router.post(
-    '/',
+    '/add',
     [
         authMiddleware,
         [
@@ -67,7 +67,7 @@ router.post(
                 name,
                 status: status || 'current',
                 details,
-                comapny: company || 'Insnpsys',
+                company: company || 'Insnpsys',
                 location,
                 designation,
                 skills: skills.split(',').map((skill) => skill.trim()),

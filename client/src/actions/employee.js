@@ -49,43 +49,40 @@ export const getEmployeeById = (empId) => async (dispatch) => {
 };
 
 // Create Employee Profile
-export const createEmployeeProfile =
-    (formData, history) => async (dispatch) => {
-        try {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            };
+export const createEmployee = (formData, history) => async (dispatch) => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
 
-            const res = await axios.post('/api/employees', formData, config);
+        const res = await axios.post('/api/employees/add', formData, config);
 
-            dispatch({
-                type: GET_EMPLOYEE,
-                payload: res.data,
-            });
+        dispatch({
+            type: GET_EMPLOYEE,
+            payload: res.data,
+        });
 
-            dispatch(setAlert('Employee Profile Created', 'success'));
+        dispatch(setAlert('Employee Profile Created', 'success'));
 
-            history.push('/dashboard'); // Redirect to the dashboard or the desired route
-        } catch (err) {
-            const errors = err.response?.data?.errors;
+        history.push('/dashboard'); // Redirect to the dashboard or the desired route
+    } catch (err) {
+        const errors = err.response?.data?.errors;
 
-            if (errors) {
-                errors.forEach((error) =>
-                    dispatch(setAlert(error.msg, 'danger'))
-                );
-            }
-
-            dispatch({
-                type: EMPLOYEE_ERROR,
-                payload: {
-                    msg: err.response?.statusText,
-                    status: err.response?.status,
-                },
-            });
+        if (errors) {
+            errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
         }
-    };
+
+        dispatch({
+            type: EMPLOYEE_ERROR,
+            payload: {
+                msg: err.response?.statusText,
+                status: err.response?.status,
+            },
+        });
+    }
+};
 
 // Update Employee Profile by ID
 export const updateEmployeeProfile = (empId, formData) => async (dispatch) => {

@@ -8,6 +8,7 @@ import store from './store';
 import EditEmployee from './components/Employee/EditEmployee';
 import EmpDetails from './components/Employee/EmpDetails';
 import DeleteEmployee from './components/Employee/DeleteEmployee';
+import CreateEmployee from './components/Employee/CreateEmployee';
 import './App.css';
 
 const App = () => (
@@ -22,6 +23,8 @@ const App = () => (
                         element={<Admin_dashboard />}
                     />
                     <Route path="/employees" element={<Employee />} />
+                    {/* // Used the element instead of the component*/}
+                    <Route path="/employees/add" element={<CreateEmployee />} />
                     {/* <Route path="/employee/:id" component={EmpDetails} /> */}
                     <Route path="/employee/edit/:id" component={EditEmployee} />
                     <Route path="/employee/:id" component={DeleteEmployee} />
