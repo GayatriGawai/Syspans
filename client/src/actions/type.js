@@ -1,0 +1,9 @@
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
+export const GET_EMPLOYEE = 'GET_EMPLOYEE';
+export const EMPLOYEE_ERROR = 'EMPLOYEE_ERROR';
+export const GET_EMPLOYEES = 'GET_EMPLOYEES';
+export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
+export const DELETE_EMPLOYEE = 'DELETE_EMPLOYEE';

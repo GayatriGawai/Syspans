@@ -5,8 +5,6 @@ const authMiddleware = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const { v4: uuidv4 } = require('uuid');
 
-//Performed the CRUD operations
-
 // @route   POST api/employees
 // @desc    Create a new employee
 // @access  Private
@@ -36,7 +34,7 @@ router.post(
             // Generating the uniq ID for employee
             const empID = uuidv4();
 
-            //Checking if the user exists
+            //Checking if the employee exists
 
             const { email } = req.body;
             const oldEmp = await Employee.findOne({
@@ -66,7 +64,6 @@ router.post(
             } = req.body;
 
             const empFields = {
-                empID,
                 name,
                 status: status || 'current',
                 details,
@@ -141,10 +138,10 @@ router.get('/:id', authMiddleware, async (req, res) => {
 });
 
 //====================================================================================================
-// @route   PUT api/user/:id
+// @route   PUT api/employee/:id
 // @desc    Update employee by ID
 // @access  Private
-router.put('/:id', authMiddleware, async (req, res) => {
+router.put('/edit/:id', authMiddleware, async (req, res) => {
     try {
         const employee = await Employee.findByIdAndUpdate(
             req.params.id,
@@ -166,7 +163,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
     }
 });
 //====================================================================================================
-// @route   DELETE api/user/:id
+// @route   DELETE api/employee/:id
 // @desc    Delete employee by ID
 // @access  Private
 router.delete('/:id', authMiddleware, async (req, res) => {

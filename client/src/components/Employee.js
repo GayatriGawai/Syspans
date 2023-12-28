@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-const Employee = () => {
+import { deleteEmployee } from '../actions/employee';
+import { useDispatch } from 'react-redux';
+//import { getEmployees } from '../actions/employee';
+//import DeleteEmployee from './Employee/DeleteEmployee';
+const Employee = (employee) => {
+    const dispatch = useDispatch();
     console.log('Employee component rendered');
     const [employees, setEmployees] = useState([]);
 
     useEffect(() => {
         // Retrieved the token from localStorage
-        const token = localStorage.getItem('jwtToken');
+        const token = localStorage.getItem('jwtSecret');
 
         // Checked if the token is available
         if (token) {
@@ -33,6 +37,17 @@ const Employee = () => {
         }
     }, []);
 
+    const handleDelete = async (empId) => {
+        try {
+            if (window.confirm('Are you sure? This can NOT be undone!')) {
+                await dispatch(deleteEmployee(empId));
+                // dispatch(deleteEmployee(employee._id));
+            }
+        } catch (error) {
+            console.error('Error deleting employee:', error);
+        }
+    };
+
     return (
         <div>
             <div>
@@ -51,7 +66,7 @@ const Employee = () => {
                         <Link
                             to={'/employees'}
                             type="button"
-                            className="bg-green-500 float-right mb-2 h-10 w-10 text-center rounded p-2 text-white hover:bg-green-600 hover:scale-105 hover:opacity-100 transition duration-300 ease-in-out"
+                            className="bg-green-500 float-right mb-2 h-10 w-fit text-center rounded p-2 text-white hover:bg-green-600 hover:scale-105 hover:opacity-100 transition duration-300 ease-in-out"
                         >
                             <i className="fas fa-add"> </i>
                         </Link>
@@ -72,10 +87,10 @@ const Employee = () => {
                             <tbody className="text-center text-sm font-medium">
                                 {employees.map((employee) => (
                                     <tr key={employee._id} className="h-10">
-                                        <td>{employee.empId}</td>
+                                        <td>{employee._id}</td>
                                         <td>
                                             <Link
-                                                to="/demo2.html"
+                                                to={`/employee/${employee._id}`}
                                                 className="hover:text-red-700"
                                             >
                                                 {employee.name}
@@ -84,19 +99,21 @@ const Employee = () => {
                                         <td>{employee.designation}</td>
                                         <td>{employee.status}</td>
                                         <td>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                to={`/employee/edit/${employee._id}`}
                                                 className="text-blue-500"
                                             >
                                                 <i className="fas fa-pencil"></i>
-                                            </a>
+                                            </Link>
 
-                                            <a
-                                                href="#"
+                                            <button
+                                                onClick={() =>
+                                                    handleDelete(employee._id)
+                                                }
                                                 className="text-red-500 ml-2"
                                             >
                                                 <i className="fas fa-trash"></i>
-                                            </a>
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}

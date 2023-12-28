@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alert';
+import PropTypes from 'prop-types';
 
-const Login = () => {
+const Login = ({ setAlert }) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -24,8 +27,8 @@ const Login = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    email: 'admin@insnapsys.com',
-                    password: 'admin',
+                    email: formData.email,
+                    password: formData.password,
                 }),
             });
 
@@ -34,16 +37,16 @@ const Login = () => {
                 throw new Error(errorData.message);
             }
 
-            const { token } = await response.json(); // Extract token from the response
+            const { token } = await response.json();
 
-            // Store the token in localStorage or state for future use
             localStorage.setItem('jwtSecret', token);
 
-            alert('Logged in successfully'); // You can replace this with a redirect or any other action
+            setAlert('Logged in successfully', 'success');
+
             navigate('/admin_dashboard');
         } catch (error) {
             console.error('Error during login:', error.message);
-            alert('Error during login. Please try again.');
+            setAlert('Error during login. Please try again.', 'danger');
         }
     };
 
@@ -103,5 +106,7 @@ const Login = () => {
         </div>
     );
 };
-
-export default Login;
+Login.propTypes = {
+    setAlert: PropTypes.func.isRequired,
+};
+export default connect(null, { setAlert })(Login);
