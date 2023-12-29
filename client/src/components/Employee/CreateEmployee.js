@@ -32,18 +32,20 @@ const CreateEmployee = (props) => {
                 </p>
             </header>
             <div className="w-full h-screen p-10 ">
-                <form onSubmit={(e) => onSubmit(e)}>
+                <form
+                    onSubmit={(e) => onSubmit(e)}
+                    className="h-full bg-yellow-700"
+                >
                     <div className="mb-2">
                         <label>Name</label>
-                        <span className="ml-1 bg-gray-200 appearance-none border-2 border-gray rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
-                            <input
-                                type="text"
-                                name="name"
-                                value={name}
-                                onChange={(e) => onChange(e)}
-                                required
-                            />
-                        </span>
+                        <input
+                            className="sm:text-sm border-gray-300 rounded-m"
+                            type="text"
+                            name="name"
+                            value={name}
+                            onChange={(e) => onChange(e)}
+                            required
+                        />
                     </div>
 
                     <div>
