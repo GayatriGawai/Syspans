@@ -4,7 +4,7 @@ import {
     EMPLOYEE_ERROR,
     UPDATE_EMPLOYEE,
     DELETE_EMPLOYEE,
-} from '../actions/type';
+} from '../actions/types';
 
 const initialState = {
     employee: null,

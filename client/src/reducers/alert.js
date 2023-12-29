@@ -1,13 +1,28 @@
-import { SET_ALERT, REMOVE_ALERT } from '../actions/type';
-const initialState = [];
+import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from '../actions/types';
+
+const initialState = {
+    token: localStorage.getItem('token'),
+    loading: true,
+    employee: null,
+};
 
 export default function (state = initialState, action) {
     const { type, payload } = action;
+
     switch (type) {
-        case SET_ALERT:
-            return [...state, payload];
-        case REMOVE_ALERT:
-            return state.filter((alert) => alert.id !== payload);
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                ...payload,
+                loading: false,
+            };
+        case LOGIN_FAIL:
+        case LOGOUT:
+            return {
+                ...state,
+                token: null,
+                loading: false,
+            };
         default:
             return state;
     }

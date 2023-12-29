@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
+import { login } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-const Login = ({ setAlert }) => {
+const Login = ({ login }) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -19,6 +20,7 @@ const Login = ({ setAlert }) => {
 
     const validateLogin = async (e) => {
         e.preventDefault();
+        login(email, password);
 
         try {
             const response = await fetch('http://localhost:5000/api/login', {
@@ -107,6 +109,6 @@ const Login = ({ setAlert }) => {
     );
 };
 Login.propTypes = {
-    setAlert: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
 };
-export default connect(null, { setAlert })(Login);
+export default connect(null, { login })(Login);

@@ -15,7 +15,6 @@ const EmployeeSchema = new mongoose.Schema({
             'trainee',
             'intern',
         ],
-        default: 'current',
         required: true,
     },
     details: [

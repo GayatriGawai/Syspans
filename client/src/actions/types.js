@@ -7,3 +7,6 @@ export const EMPLOYEE_ERROR = 'EMPLOYEE_ERROR';
 export const GET_EMPLOYEES = 'GET_EMPLOYEES';
 export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
 export const DELETE_EMPLOYEE = 'DELETE_EMPLOYEE';
+export const LOGOUT = 'LOGOUT';
+export const CREATE_ERROR = 'CREATE_ERROR';
+export const CREATE_SUCCESS = 'CREATE_SUCCESS';

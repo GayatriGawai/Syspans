@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import { login } from './auth';
 // employee.js
 
 import {
@@ -8,7 +9,9 @@ import {
     GET_EMPLOYEES,
     UPDATE_EMPLOYEE,
     DELETE_EMPLOYEE,
-} from './type';
+    CREATE_SUCCESS,
+    CREATE_ERROR,
+} from './types';
 // Get all employees
 export const getEmployees = () => async (dispatch) => {
     try {
@@ -51,22 +54,29 @@ export const getEmployeeById = (empId) => async (dispatch) => {
 // Create Employee Profile
 export const createEmployee = (formData, history) => async (dispatch) => {
     try {
+        const token = localStorage.getItem('jwtSecret');
         const config = {
             headers: {
                 'Content-Type': 'application/json',
+                'x-auth-token': token,
             },
         };
+        console.log(formData);
 
-        const res = await axios.post('/api/employees/add', formData, config);
+        const res = await axios.post(
+            'http://localhost:5000/api/employees/add',
+            formData,
+            config
+        );
 
         dispatch({
-            type: GET_EMPLOYEE,
+            type: CREATE_SUCCESS,
             payload: res.data,
         });
 
         dispatch(setAlert('Employee Profile Created', 'success'));
 
-        history.push('/dashboard'); // Redirect to the dashboard or the desired route
+        history.push('/employees'); // Redirect to the dashboard or the desired route
     } catch (err) {
         const errors = err.response?.data?.errors;
 
@@ -75,7 +85,7 @@ export const createEmployee = (formData, history) => async (dispatch) => {
         }
 
         dispatch({
-            type: EMPLOYEE_ERROR,
+            type: CREATE_ERROR,
             payload: {
                 msg: err.response?.statusText,
                 status: err.response?.status,
@@ -87,9 +97,11 @@ export const createEmployee = (formData, history) => async (dispatch) => {
 // Update Employee Profile by ID
 export const updateEmployeeProfile = (empId, formData) => async (dispatch) => {
     try {
+        const token = localStorage.getItem('jwtSecret');
         const config = {
             headers: {
                 'Content-Type': 'application/json',
+                'x-auth-token': token,
             },
         };
 
