@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { createEmployee } from '../../actions/employee';
 import { connect } from 'react-redux';
 
-const CreateEmployee = (createEmployee) => {
+const CreateEmployee = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -284,9 +284,10 @@ const CreateEmployee = (createEmployee) => {
 
                     <button
                         type="submit"
+                        onSubmit={(e) => onSubmit(e)}
                         className="font-semibold bg-green-500 float-right mb-2 mt-5 h-10 w-fit text-center rounded p-2 text-white hover:bg-green-600 hover:scale-105 hover:opacity-100 transition duration-300 ease-in-out"
                     >
-                        Add Employee
+                        <Link to={`\employees`}>Add Employee</Link>
                     </button>
                 </form>
             </div>
