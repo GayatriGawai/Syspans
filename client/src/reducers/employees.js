@@ -1,5 +1,7 @@
 import {
     GET_EMPLOYEE,
+    GET_EMPLOYEE_SUCCESS,
+    GET_EMPLOYEE_FAILURE,
     GET_EMPLOYEES,
     EMPLOYEE_ERROR,
     UPDATE_EMPLOYEE,
@@ -7,14 +9,13 @@ import {
 } from '../actions/types';
 
 const initialState = {
-    employee: null,
+    employee: {},
     loading: true,
     error: {},
 };
 
-const employee = (state = initialState, action) => {
+const employees = (state = initialState, action) => {
     const { type, payload } = action;
-
     switch (type) {
         case GET_EMPLOYEE:
         case UPDATE_EMPLOYEE:
@@ -23,13 +24,20 @@ const employee = (state = initialState, action) => {
                 employee: payload,
                 loading: false,
             };
+        case GET_EMPLOYEE_SUCCESS:
+            return {
+                ...state,
+                employee: action.payload,
+                loading: false,
+            };
         case GET_EMPLOYEES:
             return {
                 ...state,
-                employees: action.payload.employees,
+                employees: payload.employees,
                 loading: false,
             };
         case EMPLOYEE_ERROR:
+        case GET_EMPLOYEE_FAILURE:
             return {
                 ...state,
                 error: payload,
@@ -41,10 +49,9 @@ const employee = (state = initialState, action) => {
                 employee: null,
                 loading: false,
             };
-
         default:
             return state;
     }
 };
 
-export default employee;
+export default employees;

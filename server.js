@@ -21,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 
 //Defining the routes
 app.use('/api', require('./routes/api/admin')); // for admin
+// app.use('/api/employee', require('.routes/api/employee'));
 app.use('/api/auth', require('./routes/api/auth')); // auth
 app.use('/api/timesheet', require('./routes/api/timesheet')); // timesheet
 app.use('/api/leave', require('./routes/api/leave')); // leave management

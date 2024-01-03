@@ -3,35 +3,51 @@ import { Link } from 'react-router-dom';
 import { deleteEmployee } from '../actions/employee';
 import { useDispatch } from 'react-redux';
 import { getEmployees } from '../actions/employee';
+import Pagination from './auth/Pagination';
 
 const Employee = (employee) => {
     const dispatch = useDispatch();
-    console.log('Employee component rendered');
     const [employees, setEmployees] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPage = 0, setTotalPages] = useState(1);
 
     useEffect(() => {
-        const token = localStorage.getItem('jwtSecret');
+        const fetchEmployees = async () => {
+            const token = localStorage.getItem('jwtSecret');
+            const limit = 10;
 
-        if (token) {
-            console.log('Token:', token);
-            fetch('http://localhost:5000/api/employees', {
-                headers: {
-                    'x-auth-token': token,
-                },
-            })
-                .then((response) => {
-                    console.log('response status', response.status);
-                    return response.json();
-                })
-                .then((data) => {
-                    console.log('Fetched Data:', data);
-                    setEmployees(data);
-                })
-                .catch((error) => console.error('Error fetching data:', error));
-        } else {
-            console.error('Token is undefined');
-        }
-    }, []);
+            if (token) {
+                try {
+                    const response = await fetch(
+                        `http://localhost:5000/api/employees?page=${currentPage}`,
+                        {
+                            headers: {
+                                'x-auth-token': token,
+                            },
+                        }
+                    );
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        setEmployees(data);
+                        // Assuming your API sends the total number of pages in the response
+                        setTotalPages(data.totalPage);
+                    } else {
+                        console.error(
+                            'Error fetching data:',
+                            response.statusText
+                        );
+                    }
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            } else {
+                console.error('Token is undefined');
+            }
+        };
+
+        fetchEmployees();
+    }, [currentPage]);
     const handleDelete = async (empId) => {
         try {
             await dispatch(deleteEmployee(empId));
@@ -42,7 +58,9 @@ const Employee = (employee) => {
             console.error('Error deleting employee:', error);
         }
     };
-
+    const onPageChange = (page) => {
+        setCurrentPage(page);
+    };
     return (
         <div>
             <div>
@@ -85,7 +103,7 @@ const Employee = (employee) => {
                                         <td>{employee._id}</td>
                                         <td>
                                             <Link
-                                                to={`/employee/${employee._id}`}
+                                                to={`/employee/get/${employee._id}`}
                                                 className="hover:text-red-700"
                                             >
                                                 {employee.name}
@@ -117,6 +135,11 @@ const Employee = (employee) => {
                     </div>
                 </div>
             </div>
+            <Pagination
+                currentPage={currentPage}
+                totalPage={totalPage}
+                onPageChange={onPageChange}
+            />
         </div>
     );
 };

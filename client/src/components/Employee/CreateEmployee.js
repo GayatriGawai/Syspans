@@ -12,14 +12,45 @@ const CreateEmployee = () => {
     const [formData, setFormData] = useState({
         name: '',
         status: '',
-        details: [{}], //it is an array of details
+        details: [{ address: '', phone: '', email: '' }], //it is an array of details
         company: '',
         location: '',
         designation: '',
         skills: '',
+        education: [
+            {
+                school: '',
+                degree: '',
+                fieldofstudy: '',
+                description: '',
+                from: '',
+                to: '',
+                current: false,
+            },
+        ],
+        experience: [
+            {
+                title: '',
+                company: '',
+                location: '',
+                description: '',
+                from: '',
+                to: '',
+                current: false,
+            },
+        ],
     });
-    const { name, status, details, company, location, designation, skills } =
-        formData;
+    const {
+        name,
+        status,
+        details,
+        company,
+        location,
+        designation,
+        skills,
+        education,
+        experience,
+    } = formData;
 
     const onChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,6 +59,17 @@ const CreateEmployee = () => {
         const newDetails = [...details];
         newDetails[index][field] = value;
         setFormData({ ...formData, details: newDetails });
+    };
+    const onEducationChange = (index, field, value) => {
+        const newEducation = [...education];
+        newEducation[index][field] = value;
+        setFormData({ ...formData, education: newEducation });
+    };
+
+    const onExperienceChange = (index, field, value) => {
+        const newExperience = [...experience];
+        newExperience[index][field] = value;
+        setFormData({ ...formData, experience: newExperience });
     };
 
     const onSubmit = async (e) => {
@@ -59,7 +101,7 @@ const CreateEmployee = () => {
                             value={name}
                             onChange={(e) => onChange(e)}
                             required
-                            className="block w-full sm:text-sm h-10 rounded-md bg-gray-100 mt-2"
+                            className="block w-full text-sm h-10 rounded-md bg-gray-100 mt-2"
                             placeholder=" Enter full name"
                         />
                     </div>
@@ -184,7 +226,7 @@ const CreateEmployee = () => {
                                             e.target.value
                                         )
                                     }
-                                    className="block bg-gray-100 w-full sm:text-sm h-10 border-gray-300 rounded-md mt-2"
+                                    className="block bg-gray-100 w-full text-sm h-10 border-gray-300 rounded-md mt-2"
                                     placeholder=" Enter the address"
                                     required
                                 />
@@ -204,7 +246,7 @@ const CreateEmployee = () => {
                                             e.target.value
                                         )
                                     }
-                                    className="block bg-gray-100 w-full sm:text-sm h-10 border-gray-300 rounded-md mt-2"
+                                    className="block bg-gray-100 w-full text-sm h-10 border-gray-300 rounded-md mt-2"
                                     placeholder=" Enter phone number"
                                     required
                                 />
@@ -224,7 +266,7 @@ const CreateEmployee = () => {
                                             e.target.value
                                         )
                                     }
-                                    className="block bg-gray-100 w-full sm:text-sm h-10 border-gray-300 rounded-md mt-2"
+                                    className="block bg-gray-100 w-full text-sm h-10 border-gray-300 rounded-md mt-2"
                                     placeholder=" Enter email address"
                                     required
                                 />
@@ -239,7 +281,7 @@ const CreateEmployee = () => {
                             name="company"
                             value={company}
                             onChange={(e) => onChange(e)}
-                            className="block w-full sm:text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                            className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
                             placeholder=" Comapny name"
                         />
                     </div>
@@ -282,12 +324,310 @@ const CreateEmployee = () => {
                         />
                     </div>
 
+                    {/* Education details */}
+                    <div className="mb-6">
+                        <label className="font-semibold mt-5 block mb-2">
+                            Education
+                            <i className="fa-asterisk text-red-500"></i>
+                        </label>
+                        {education.map((edu, index) => (
+                            <div key={index} className="mb-2">
+                                <div>
+                                    <label className="font-semibold text-sm">
+                                        School
+                                        <i className="fa-asterisk text-red-500"></i>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="school"
+                                        value={edu.school}
+                                        onChange={(e) =>
+                                            onEducationChange(
+                                                index,
+                                                e.target.name,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                                        placeholder=" School name"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="font-semibold text-sm">
+                                        Degree
+                                        <i className="fa-asterisk text-red-500"></i>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="degree"
+                                        value={edu.degree}
+                                        onChange={(e) =>
+                                            onEducationChange(
+                                                index,
+                                                e.target.name,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                                        placeholder=" Degree"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="font-semibold text-sm">
+                                        Field of Study
+                                        <i className="fa-asterisk text-red-500"></i>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="fieldofstudy"
+                                        value={edu.fieldofstudy}
+                                        onChange={(e) =>
+                                            onEducationChange(
+                                                index,
+                                                e.target.name,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                                        placeholder=" Field of study"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="font-semibold text-sm">
+                                        Description
+                                        <i className="fa-asterisk text-red-500"></i>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="description"
+                                        value={edu.description}
+                                        onChange={(e) =>
+                                            onEducationChange(
+                                                index,
+                                                e.target.name,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                                        placeholder=" Description"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="font-semibold text-sm">
+                                        From
+                                        <i className="fa-asterisk text-red-500"></i>
+                                    </label>
+                                    <input
+                                        type="date"
+                                        name="from"
+                                        value={edu.from}
+                                        onChange={(e) =>
+                                            onEducationChange(
+                                                index,
+                                                e.target.name,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="font-semibold text-sm">
+                                        to
+                                    </label>
+                                    <input
+                                        type="date"
+                                        name="to"
+                                        value={edu.to}
+                                        onChange={(e) =>
+                                            onEducationChange(
+                                                index,
+                                                e.target.name,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="font-semibold text-xs text-gray-700">
+                                        Are you currently studying?
+                                    </label>
+                                    <input
+                                        type="checkbox"
+                                        name="current"
+                                        checked={edu.current}
+                                        onChange={() =>
+                                            onEducationChange(
+                                                index,
+                                                'current',
+                                                !edu.current
+                                            )
+                                        }
+                                        className="block bg-gray-100 border-gray-300 rounded-md mt-2"
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <label className="font-semibold block mb-2">
+                        Experience
+                    </label>
+                    <div className="mb-6">
+                        {experience.map((exp, index) => (
+                            <div key={index} className="mb-2">
+                                <div>
+                                    <label className="font-semibold text-sm">
+                                        Title
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        value={exp.title}
+                                        onChange={(e) =>
+                                            onExperienceChange(
+                                                index,
+                                                e.target.name,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                                        placeholder=" Title/Designation"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="font-semibold text-sm">
+                                        Company
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="company"
+                                        value={exp.company}
+                                        onChange={(e) =>
+                                            onExperienceChange(
+                                                index,
+                                                e.target.name,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                                        placeholder=" Company"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="font-semibold text-sm">
+                                        Location
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="location"
+                                        value={exp.location}
+                                        onChange={(e) =>
+                                            onExperienceChange(
+                                                index,
+                                                e.target.name,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                                        placeholder=" Location"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="font-semibold text-sm">
+                                        Description
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="description"
+                                        value={exp.description}
+                                        onChange={(e) =>
+                                            onExperienceChange(
+                                                index,
+                                                e.target.name,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                                        placeholder=" Description"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="font-semibold text-sm">
+                                        From
+                                    </label>
+                                    <input
+                                        type="date"
+                                        name="from"
+                                        value={exp.from}
+                                        onChange={(e) =>
+                                            onExperienceChange(
+                                                index,
+                                                e.target.name,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="font-semibold text-sm">
+                                        to
+                                    </label>
+                                    <input
+                                        type="date"
+                                        name="to"
+                                        value={exp.to}
+                                        onChange={(e) =>
+                                            onExperienceChange(
+                                                index,
+                                                e.target.name,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full text-sm h-10 mb-5 bg-gray-100 border-gray-300 rounded-md mt-2"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="font-semibold text-xs text-gray-700">
+                                        Are you currently working there?
+                                    </label>
+                                    <input
+                                        type="checkbox"
+                                        name="current"
+                                        checked={exp.current}
+                                        onChange={() =>
+                                            onExperienceChange(
+                                                index,
+                                                'current',
+                                                !exp.current
+                                            )
+                                        }
+                                        className="block bg-gray-100 border-gray-300 rounded-md mt-2"
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                        <button
+                            type="button"
+                            onClick={() =>
+                                setFormData({
+                                    ...formData,
+                                    experience: [...experience, {}],
+                                })
+                            }
+                            className="bg-gray-300 py-2 px-4 rounded"
+                        >
+                            Add Experience
+                        </button>
+                    </div>
+
                     <button
                         type="submit"
-                        onSubmit={(e) => onSubmit(e)}
                         className="font-semibold bg-green-500 float-right mb-2 mt-5 h-10 w-fit text-center rounded p-2 text-white hover:bg-green-600 hover:scale-105 hover:opacity-100 transition duration-300 ease-in-out"
                     >
-                        <Link to={`\employees`}>Add Employee</Link>
+                        Add Employee
                     </button>
                 </form>
             </div>

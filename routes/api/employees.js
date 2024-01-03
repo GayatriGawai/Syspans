@@ -14,7 +14,7 @@ router.post(
     [
         authMiddleware,
         [
-            check('name', 'Name is required').notEmpty(),
+            check('name', 'Name is required').not().isEmpty(),
             check('status', 'Status is required').notEmpty(),
             check('details.*.address', 'Address is required').notEmpty(),
             check('details.*.phone', 'Phone number is required').notEmpty(),
@@ -70,7 +70,7 @@ router.post(
                 company: company || 'Insnpsys',
                 location,
                 designation,
-                skills: skills.split(',').map((skill) => skill.trim()),
+                skills: skills.split(','),
                 experience,
                 education,
                 attendance,
@@ -121,15 +121,23 @@ router.get('/', authMiddleware, async (req, res) => {
 // @route   GET api/employees/:id
 // @desc    Get employee by ID
 // @access  Private
-router.get('/:id', authMiddleware, async (req, res) => {
+router.get('/get/:id', authMiddleware, async (req, res) => {
     try {
+        console.log('Received Params:', req.params);
+
         const employee = await Employee.findOne({ _id: req.params.id });
+
+        console.log('Received Employee ID:', req.params.id);
+
         if (!employee) {
             return res.status(404).json({ msg: 'Emoployee not found' });
         }
+        console.log('Employee data:', employee);
+
         res.json(employee);
     } catch (error) {
         console.error(error.message);
+
         if (error.kind === 'ObjectId') {
             return res.status(404).json({ msg: 'Emoployee not found' });
         }

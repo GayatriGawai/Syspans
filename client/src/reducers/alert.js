@@ -3,7 +3,7 @@ import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from '../actions/types';
 const initialState = {
     token: localStorage.getItem('token'),
     loading: true,
-    employee: null,
+    employee: {},
 };
 
 export default function (state = initialState, action) {

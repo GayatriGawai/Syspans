@@ -4,7 +4,9 @@ import { login } from './auth';
 // employee.js
 
 import {
-    GET_EMPLOYEE,
+    GET_EMPLOYEE_REQUEST,
+    GET_EMPLOYEE_SUCCESS,
+    GET_EMPLOYEE_FAILURE,
     EMPLOYEE_ERROR,
     GET_EMPLOYEES,
     UPDATE_EMPLOYEE,
@@ -32,27 +34,38 @@ export const getEmployees = () => async (dispatch) => {
 };
 
 // GET PROFILE by ID
+
 export const getEmployeeById = (empId) => async (dispatch) => {
     try {
-        const res = await axios.get(`/api/employees/${empId}`);
-
+        console.log(empId);
+        const token = localStorage.getItem('jwtSecret');
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': token,
+            },
+        };
+        const res = await axios.get(`/api/employees/get/${empId}`, config);
+        console.log('Response from server:', res);
+        const employeeData = res.data;
         dispatch({
-            type: GET_EMPLOYEE,
-            payload: res.data,
+            type: GET_EMPLOYEE_SUCCESS,
+            payload: employeeData,
         });
     } catch (err) {
+        console.error('Error in getEmployeeById:', err);
+        const errorMessage = err.response
+            ? err.response.data.msg
+            : 'Server error';
         dispatch({
-            type: EMPLOYEE_ERROR,
-            payload: {
-                msg: err.response.statusText,
-                status: err.response.status,
-            },
+            type: GET_EMPLOYEE_FAILURE,
+            payload: errorMessage,
         });
     }
 };
 
 // Create Employee Profile
-export const createEmployee = (formData, history) => async (dispatch) => {
+export const createEmployee = (formData, navigate) => async (dispatch) => {
     try {
         const token = localStorage.getItem('jwtSecret');
         const config = {
@@ -76,7 +89,7 @@ export const createEmployee = (formData, history) => async (dispatch) => {
 
         dispatch(setAlert('Employee Profile Created', 'success'));
 
-        history.push('/employees'); // Redirect to the dashboard or the desired route
+        navigate('/employees'); // Redirect to the dashboard or the desired route
     } catch (err) {
         const errors = err.response?.data?.errors;
 
