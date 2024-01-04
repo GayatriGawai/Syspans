@@ -51,7 +51,7 @@ function Pagination({ currentPage, totalPage = 0, onPageChange }) {
                     }`}
                 >
                     <button
-                        className="px-3 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600"
+                        className="px-3 py-2 rounded-md bg-green-500 text-white hover:bg-green-600"
                         onClick={() => onPageChange(currentPage + 1)}
                         disabled={currentPage === totalPage}
                     >
