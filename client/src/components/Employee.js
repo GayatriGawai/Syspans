@@ -64,14 +64,14 @@ const Employee = (employee) => {
     return (
         <div>
             <div>
-                <header className="bg-yellow-600 w-fit h-16 py-2">
+                <nav className="bg-yellow-600 opacity-80 w-full h-16 py-2 fixed ">
                     <p className="text-center font-semibold text-4xl px-5">
                         <i className="fas fa-users"></i> Employees
                     </p>
-                </header>
+                </nav>
             </div>
             <div className="container mx-auto p-4">
-                <h2 className="text-xl font-semibold  mt-5 text-2xl">
+                <h2 className="text-xl font-semibold text-2xl pt-14">
                     <i className="fas fa-list"> </i> Employee List
                 </h2>
                 <div className="container">

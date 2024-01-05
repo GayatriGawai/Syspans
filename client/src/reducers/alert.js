@@ -1,28 +1,15 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from '../actions/types';
+import { SET_ALERT, REMOVE_ALERT } from '../actions/types';
 
-const initialState = {
-    token: localStorage.getItem('token'),
-    loading: true,
-    employee: {},
-};
+const initialState = [];
 
 export default function (state = initialState, action) {
     const { type, payload } = action;
-
+    console.log('Reducer called with action type:', type);
     switch (type) {
-        case LOGIN_SUCCESS:
-            return {
-                ...state,
-                ...payload,
-                loading: false,
-            };
-        case LOGIN_FAIL:
-        case LOGOUT:
-            return {
-                ...state,
-                token: null,
-                loading: false,
-            };
+        case SET_ALERT:
+            return [...state, payload];
+        case REMOVE_ALERT:
+            return state.filter((alert) => alert.id !== payload);
         default:
             return state;
     }

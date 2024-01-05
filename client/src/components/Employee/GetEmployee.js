@@ -18,13 +18,13 @@ const GetEmployee = ({ getEmployeeById }) => {
     return (
         <Fragment>
             <div>
-                <div className="bg-yellow-600 h-16 md:h-auto py-2">
-                    <header className="text-center font-semibold text-4xl px-5 md:text-xl">
+                <div className="bg-yellow-600 h-16 md:h-auto py-2 opacity-80 w-full h-16 py-2 fixed top-0">
+                    <nav className="text-center font-semibold text-4xl px-5 md:text-xl ">
                         <i className="fas fa-user"></i> Welcome to the profile
                         of {employeeData.name}
-                    </header>
+                    </nav>
                 </div>
-                <div className="mt-5 ml-2">
+                <div className="mt-5 ml-2 pt-10 flex">
                     <Link
                         to="/employees"
                         className="rounded inline-block bg-gray-300 py-2 px-5 focus:outline-none hover:opacity-75 transition-opacity"
@@ -35,7 +35,7 @@ const GetEmployee = ({ getEmployeeById }) => {
 
                 <div className="rounded grid grid-cols-1 grid-rows-5 gap-4 bg-gray-200 m-2">
                     <div className="flex items-center justify-center col-span-1">
-                        <i className="fas fa-user-circle text-10xl md:text-8xl"></i>
+                        <i className="fas flex fa-user-circle text-10xl md:text-8xl"></i>
                     </div>
                     <div className="text-center col-span-1">
                         <h2 className="text-xl font-semibold mb-2">

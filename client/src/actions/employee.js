@@ -13,11 +13,15 @@ import {
     DELETE_EMPLOYEE,
     CREATE_SUCCESS,
     CREATE_ERROR,
+    CLEAR_EMPLOYEE,
 } from './types';
 // Get all employees
 export const getEmployees = () => async (dispatch) => {
+    dispatch({
+        type: CLEAR_EMPLOYEE,
+    });
     try {
-        const res = await axios.get('/api/employee');
+        const res = await axios.get('/api/employees');
         dispatch({
             type: GET_EMPLOYEES,
             payload: res.data,

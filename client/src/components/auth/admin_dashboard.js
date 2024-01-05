@@ -16,12 +16,13 @@ const Admin_dashboard = () => {
     }, []);
     return (
         <div>
-            <header className="bg-yellow-600 w-fit h-16 py-2">
-                <p className="text-center font-semibold text-4xl px-5">
-                    <i className="fas fa-user"></i> Admin Dashboard
-                </p>
-            </header>
-
+            <div>
+                <nav className="bg-yellow-600 w-full h-16 py-2 fixed top-0">
+                    <p className="text-center font-semibold text-4xl">
+                        <i className="fas fa-user"></i> Admin Dashboard
+                    </p>
+                </nav>
+            </div>
             <div className="m-6 text-4x px-5 w-fit flex justify-inline space-x-px">
                 <div>
                     <Link className="employee-button px-5" to={'/employees'}>
@@ -51,10 +52,7 @@ const Admin_dashboard = () => {
                     </Link>
                 </div>
                 <div>
-                    <Link
-                        className="notifications-button px-5"
-                        to={'/timesheet'}
-                    >
+                    <Link className="timesheet-button px-5" to={'/timesheet'}>
                         <i className="far fa-clock fa-6x mt-16 text-center text-yellow-700 hover:text-yellow-600">
                             <p className="font-semibold text-sm mt-2 font-sans">
                                 Timesheet

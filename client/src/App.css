@@ -50,4 +50,37 @@
     background: #28a745;
     color: #fff;
   }
-
+.alert {
+  /* margin-top: 5px; */
+  padding: 0.8rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+  background-color: #f4f4f4;
+  color: #333;
+}
+.alert-primary
+ {
+  background-color: #17a2b8;
+  color: #fff;
+}
+.alert-light{
+  background-color: #f4f4f4;
+  color: #333;
+}
+.alert-dark {
+  background-color: #343a40;
+  color: #fff;
+}
+.alert-success {
+  background-color: #28a745;
+  color: #fff;
+}
+.alert-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+.alert-white {
+  background: #fff;
+  color: #333;
+  border: #ccc solid 1px;
+}

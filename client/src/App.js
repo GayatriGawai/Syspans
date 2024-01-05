@@ -9,12 +9,14 @@ import EditEmployee from './components/Employee/EditEmployee';
 import GetEmployee from './components/Employee/GetEmployee';
 import DeleteEmployee from './components/Employee/DeleteEmployee';
 import CreateEmployee from './components/Employee/CreateEmployee';
+import Alert from './components/layout/Alert';
 import './App.css';
 
 const App = () => (
     // Provide always have an object
     <Provider store={store}>
         <Fragment>
+            <Alert />
             <Router>
                 <Routes>
                     <Route path="/" element={<Login />} />
@@ -26,7 +28,10 @@ const App = () => (
                     {/* // Used the element instead of the component*/}
                     <Route path="/employees/add" element={<CreateEmployee />} />
                     <Route path="/employee/get/:id" element={<GetEmployee />} />
-                    <Route path="/employee/edit/:id" component={EditEmployee} />
+                    <Route
+                        path="/employee/edit/:id"
+                        element={<EditEmployee />}
+                    />
                     <Route path="/employee/:id" component={DeleteEmployee} />
                 </Routes>
             </Router>

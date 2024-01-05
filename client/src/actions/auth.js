@@ -1,4 +1,4 @@
-import { LOGIN_FAIL, LOGIN_SUCCESS } from './types';
+import { LOGIN_FAIL, LOGIN_SUCCESS, CLEAR_EMPLOYEE, LOGOUT } from './types';
 import axios from 'axios';
 import { setAlert } from './alert';
 
@@ -17,7 +17,7 @@ export const login = (email, password) => async (dispatch) => {
             body,
             config
         );
-
+        console.log('Response:', res);
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data,
@@ -32,4 +32,11 @@ export const login = (email, password) => async (dispatch) => {
             type: LOGIN_FAIL,
         });
     }
+};
+
+//LOGOUT CLEAR PROFILE
+
+export const logout = () => (dispatch) => {
+    dispatch({ type: CLEAR_EMPLOYEE });
+    dispatch({ type: LOGOUT });
 };

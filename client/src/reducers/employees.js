@@ -6,6 +6,7 @@ import {
     EMPLOYEE_ERROR,
     UPDATE_EMPLOYEE,
     DELETE_EMPLOYEE,
+    CLEAR_EMPLOYEE,
 } from '../actions/types';
 
 const initialState = {
@@ -33,7 +34,7 @@ const employees = (state = initialState, action) => {
         case GET_EMPLOYEES:
             return {
                 ...state,
-                employees: payload.employees,
+                employee: payload.employees,
                 loading: false,
             };
         case EMPLOYEE_ERROR:
@@ -44,11 +45,13 @@ const employees = (state = initialState, action) => {
                 loading: false,
             };
         case DELETE_EMPLOYEE:
+        case CLEAR_EMPLOYEE:
             return {
                 ...state,
                 employee: null,
                 loading: false,
             };
+
         default:
             return state;
     }

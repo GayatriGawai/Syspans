@@ -7,7 +7,7 @@ export const setAlert =
         const id = uuidv4();
         dispatch({
             type: SET_ALERT,
-            payload: { msg, alertType, id },
+            payload: { id, msg, alertType },
         });
 
         setTimeout(
