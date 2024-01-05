@@ -659,10 +659,15 @@ const EditEmployee = ({
                             </div>
                         </div>
 
-                        <input type="submit" className="btn btn-primary my-1" />
+                        <input
+                            type="submit"
+                            className="bg-green-500 float-right mb-2 h-10 w-fit text-center rounded p-2 text-white hover:bg-gree
+                        n-600 hover:scale-105 hover:opacity-100 transition duration-300 ease-in-out"
+                        />
                         <Link
                             to={`/employee/get/${id}`}
-                            className="btn btn-light my-1"
+                            className="bg-red-500 float-left mb-2 h-10 w-fit text-center rounded p-2 text-white hover:bg-gree
+                        n-600 hover:scale-105 hover:opacity-100 transition duration-300 ease-in-out"
                         >
                             Cancel
                         </Link>
