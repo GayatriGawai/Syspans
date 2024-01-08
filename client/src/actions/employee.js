@@ -123,7 +123,7 @@ export const updateEmployeeProfile = (empId, formData) => async (dispatch) => {
         };
 
         const res = await axios.put(
-            `/api/employees/${empId}`,
+            `/api/employee/edit/${empId}`,
             formData,
             config
         );

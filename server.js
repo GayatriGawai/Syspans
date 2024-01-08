@@ -7,7 +7,7 @@ const config = require('config');
 // Enable CORS for all routes
 // Enable CORS for specific origins
 const corsOptions = {
-    origin: 'http://localhost:3000', // Change this to the actual origin of your front-end
+    origin: 'http://localhost:3000',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 204,

@@ -38,6 +38,7 @@ const Employee = (employee) => {
                             response.statusText
                         );
                     }
+                    getEmployees();
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 }
