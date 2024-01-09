@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 import { login } from './auth';
+import moment from 'moment';
 // employee.js
 
 import {
@@ -39,6 +40,10 @@ export const getEmployees = () => async (dispatch) => {
 
 // GET PROFILE by ID
 
+const formatDate = (dateString) => {
+    return moment(dateString).format('YYYY-MM-DD');
+};
+
 export const getEmployeeById = (empId) => async (dispatch) => {
     try {
         console.log(empId);
@@ -51,10 +56,24 @@ export const getEmployeeById = (empId) => async (dispatch) => {
         };
         const res = await axios.get(`/api/employees/get/${empId}`, config);
         console.log('Response from server:', res);
-        const employeeData = res.data;
+
+        const formattedEmployeeData = {
+            ...res.data,
+            experience: res.data.experience.map((exp) => ({
+                ...exp,
+                from: formatDate(exp.from),
+                to: formatDate(exp.to),
+            })),
+            education: res.data.education.map((edu) => ({
+                ...edu,
+                from: formatDate(edu.from),
+                to: formatDate(edu.to),
+            })),
+        };
+
         dispatch({
             type: GET_EMPLOYEE_SUCCESS,
-            payload: employeeData,
+            payload: formattedEmployeeData,
         });
     } catch (err) {
         console.error('Error in getEmployeeById:', err);
@@ -123,7 +142,7 @@ export const updateEmployeeProfile = (empId, formData) => async (dispatch) => {
         };
 
         const res = await axios.put(
-            `/api/employee/edit/${empId}`,
+            `/api/employees/edit/${empId}`,
             formData,
             config
         );

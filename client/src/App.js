@@ -29,7 +29,7 @@ const App = () => (
                     <Route path="/employees/add" element={<CreateEmployee />} />
                     <Route path="/employee/get/:id" element={<GetEmployee />} />
                     <Route
-                        path="/employee/edit/:id"
+                        path="/employees/edit/:id"
                         element={<EditEmployee />}
                     />
                     <Route path="/employee/:id" component={DeleteEmployee} />

@@ -7,6 +7,7 @@ import {
     UPDATE_EMPLOYEE,
     DELETE_EMPLOYEE,
     CLEAR_EMPLOYEE,
+    UPDATE_EMPLOYEE_DATA,
 } from '../actions/types';
 
 const initialState = {
@@ -25,7 +26,9 @@ const employees = (state = initialState, action) => {
                 employee: payload,
                 loading: false,
             };
+
         case GET_EMPLOYEE_SUCCESS:
+            console.log('Reducer Payload:', action.payload);
             return {
                 ...state,
                 employee: action.payload,

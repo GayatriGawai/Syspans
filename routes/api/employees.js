@@ -112,6 +112,7 @@ router.get('/', authMiddleware, async (req, res) => {
         res.json(employees);
     } catch (error) {
         console.error(error.message);
+        console.log(error);
         res.status(500).send('Server Error');
     }
 });
@@ -130,7 +131,7 @@ router.get('/get/:id', authMiddleware, async (req, res) => {
         console.log('Received Employee ID:', req.params.id);
 
         if (!employee) {
-            return res.status(404).json({ msg: 'Emoployee not found' });
+            return res.status(404).json({ msg: 'Employee not found' });
         }
         console.log('Employee data:', employee);
 
@@ -139,7 +140,7 @@ router.get('/get/:id', authMiddleware, async (req, res) => {
         console.error(error.message);
 
         if (error.kind === 'ObjectId') {
-            return res.status(404).json({ msg: 'Emoployee not found' });
+            return res.status(404).json({ msg: 'Employee not found' });
         }
         res.status(500).send('Server error');
     }

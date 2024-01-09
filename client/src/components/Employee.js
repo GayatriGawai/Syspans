@@ -114,7 +114,7 @@ const Employee = (employee) => {
                                         <td>{employee.status}</td>
                                         <td>
                                             <Link
-                                                to={`/employee/edit/${employee._id}`}
+                                                to={`/employees/edit/${employee._id}`}
                                                 className="text-blue-500"
                                             >
                                                 <i className="fas fa-pencil"></i>
